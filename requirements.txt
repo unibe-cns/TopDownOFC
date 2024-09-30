@@ -1,0 +1,7 @@
+ofcsst~=0.1.0
+numpy~=1.23.5
+matplotlib~=3.7.5
+torch~=1.13.1
+scipy~=1.9.3
+pypdf~=4.1.0
+setuptools~=68.2.2
