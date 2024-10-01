@@ -2,7 +2,7 @@
 
 ## Description
 
-This program runs the simulations and plots the figures for the manuscript 'Hierarchy of prediction errors shapes the learning of context-dependent sensory representations'. This means simulating models of mice with S1 L2/3 sensory pyramidal neurons. learning a go/no-go sensory discrimination task with possible rule reversals.
+This program runs the simulations and plots the figures for the manuscript '[Hierarchy of prediction errors shapes the learning of context-dependent sensory representations](https://www.biorxiv.org/content/10.1101/2024.09.30.615819v1)'. This means simulating models of mice with S1 L2/3 sensory pyramidal neurons. learning a go/no-go sensory discrimination task with possible rule reversals.
 
 ### Installation
 
