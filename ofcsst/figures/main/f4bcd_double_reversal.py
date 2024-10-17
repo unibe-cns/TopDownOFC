@@ -125,7 +125,7 @@ def simulate_multi_reversal_analysis(simulation_type: ids.SimulationType, slow_p
     del cur
     conn.close()
 
-    print(f"\rSimulating {sim_name} complete!")
+    print(f"\rSimulating {sim_name} is now completed!")
 
 
 def panel_c_traces(save: bool = True) -> None:
