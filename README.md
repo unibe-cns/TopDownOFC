@@ -6,7 +6,7 @@ This program runs the simulations and plots the figures for the manuscript '[Hie
 
 ### Installation
 
-If conda is not installed yet, do so following these [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html) (linux recommended). Then make sure conda is up-to-date.
+These are instructions to set up a functioning conda environment (~10 min). If conda is not installed yet, do so following these [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html) (linux recommended). Then make sure conda is up-to-date.
 ```
 conda update conda --all
 ```
@@ -33,12 +33,12 @@ python setup.py install
 
 ### Execution
 
-Before rerunning the simulations, you can test whether the installation was successful. Just enter
+Before rerunning the simulations, you can test whether the installation was successful (circa 1-2 min run time). Just enter
 ```
 python main.py plot
 ```
 
-This will plot all the simulation panels (in the folder `figures`) and assemble all the panels into the full figures (`figures/figures.pdf`). To rerun all the simulations, enter
+This will plot all the simulation panels (in the folder `figures`) and assemble all the panels into the full figures (`figures/figures.pdf`). To rerun all the simulations (circa 1 hour run time), enter
 ```
 python main.py simulate
 ```
