@@ -73,7 +73,7 @@ def run_multi_reversal(simulation_type: ids.SimulationType):
     del cur
     conn.close()
 
-    print(f"\rSimulating {sim_name} complete!")
+    print(f"\rSimulating {sim_name} is now completed!")
 
 
 def panel_g_expert_times(save: bool = True, verbose: bool = False) -> None:
