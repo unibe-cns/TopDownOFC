@@ -160,7 +160,7 @@ def panel_g_expert_times(save: bool = True, verbose: bool = False) -> None:
 
 
 def run():
-    print('Simulating Figure 4e')
+    print('Simulating Figure 4g')
     run_multi_reversal(simulation_type=ids.SIM_OFC_XAP_SWITCH)
     run_multi_reversal(simulation_type=ids.SIM_CONVEX_OFC)
 
