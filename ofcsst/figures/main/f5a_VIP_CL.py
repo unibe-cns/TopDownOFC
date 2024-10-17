@@ -75,6 +75,8 @@ def run():
 
 def plot(save: bool = True):
 
+    print('Simulating for Figure 5a')
+
     # Init plot
     color = [helper.COLOR_DEFAULT, helper.COLOR_VIP]
     idxs = [0, 1]
