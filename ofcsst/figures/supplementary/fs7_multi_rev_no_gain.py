@@ -70,7 +70,7 @@ def simulate_multi_reversal_analysis():
     with open(get_path(), "wb") as f:
         pickle.dump(results, f)
 
-    print(f"\rSimulating {sim_name} complete!")
+    print(f"\rSimulating {sim_name} is now completed!")
 
 
 def panel_a_pi_weight(save: bool = True) -> None:
