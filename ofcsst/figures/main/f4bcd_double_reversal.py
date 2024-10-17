@@ -326,7 +326,7 @@ def panel_d_expert_times(save: bool = True, verbose: bool = False) -> None:
 
 
 def run():
-    print('Simulating for Figure 4:')
+    print('Simulating for Figure 4cd:')
     simulate_multi_reversal_analysis(simulation_type=SINGLE_C_SIM)
 
 
