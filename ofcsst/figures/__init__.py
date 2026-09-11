@@ -1,3 +1,5 @@
-from ofcsst.figures import helper
-from ofcsst.figures import main
-from ofcsst.figures import supplementary
+from . import helper
+from . import main
+from . import supplementary
+
+__all__ = ["helper", "main", "supplementary"]

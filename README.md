@@ -11,24 +11,14 @@ These are instructions to set up a functioning conda environment (~10 min). If c
 conda update conda --all
 ```
 
-Create a conda environment with your favorite name, here `myenv`
+Create the conda environment `ofcsst`
 ```
-conda create -n myenv python=3.10.8
+conda env create -f environment.yml
 ```
 
 Activate the conda environment 
 ```
-conda activate myenv
-```
-
-Install the required libraries
-```
-pip install -r requirements.txt
-```
-
-Setup the simulation library
-```
-python setup.py install
+conda activate ofcsst
 ```
 
 ### Execution
@@ -36,6 +26,11 @@ python setup.py install
 Before rerunning the simulations, you can test whether the installation was successful (circa 1-2 min run time). Just enter
 ```
 python main.py plot
+```
+
+To recompute the statistical tests and output the details, run
+```
+python main.py stats
 ```
 
 This will plot all the simulation panels (in the folder `figures`) and assemble all the panels into the full figures (`figures/figures.pdf`). To rerun all the simulations (circa 1 hour run time), enter
@@ -48,4 +43,4 @@ This will overwrite the current simulation outcomes in the `results/simulation` 
 python main.py scan
 ```
 
-However, be warned! This is computationally extensive and could take a very long time. Also starting them and interrupting the scanning before completion might corrupt the files in `results/scan`. We therefore strongly advise to avoid this command unless you know what you are doing. If you mess up and corrupt your files, you can recover them from the github.
+However, be warned! This is computationally extensive and could take a very long time. Also starting them and interrupting the scanning before completion might corrupt the files in `results/scan`.

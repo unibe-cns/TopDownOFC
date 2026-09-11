@@ -1,0 +1,17 @@
+name: ofcsst
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10.16
+  - numpy=1.23.5
+  - pandas=2.2.3
+  - scipy=1.9.3
+  - pyparsing=3.1.2
+  - matplotlib=3.7.3
+  - pytorch=1.13.1
+  - pip
+  - lifelines=0.30.0
+  - pip:
+      - pypdf==6.15.0
+      - -e .

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=70.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ofcsst"
+version = "0.2"
+description = "Code for the manuscript 'Hierarchy of prediction errors shapes the learning of context-dependent sensory representations'"
+readme = "README.md"
+requires-python = ">=3.10.16,<3.11"
+license = { text = "GPL-3.0" }
+authors = [
+    {name = "Matthias Chinyen Tsai", email = "matthias.chinyen.tsai@gmail.com"}
+]
+dependencies = [
+    "numpy~=1.23.5",
+    "pandas~=2.2.3",
+    "matplotlib~=3.7.3",
+    "pyparsing~=3.1.2",
+    "torch~=1.13.1",
+    "scipy~=1.9.3",
+    "pypdf~=6.15.0",
+    "lifelines~=0.30.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ofcsst*"]

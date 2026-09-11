@@ -1,6 +1,3 @@
-from ofcsst import utils
-from ofcsst import simulation
-from ofcsst import figures
-from ofcsst import scan_all
-from ofcsst import run_all
-from ofcsst import plot_all
+from . import utils, simulation, figures, scan_all, run_all, plot_all
+
+__all__ = ["utils", "simulation", "figures", "scan_all", "run_all", "plot_all"]

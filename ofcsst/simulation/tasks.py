@@ -1,3 +1,12 @@
+"""Go/no-go discrimination task with rule reversals.
+
+Each trial draws a binary population activity vector standing in for layer 2/3
+of S1: `nr_signal` stimulus units, half of which are driven on a given trial,
+plus `nr_distractor` task-irrelevant units drawn at random. The agent either
+licks or withholds; a lick on a go trial is rewarded, a lick on a no-go trial is
+punished, and withholding yields nothing. `set_task(reversal=True)` swaps which
+stimulus is the go stimulus, which is how rule reversals are delivered.
+"""
 import random
 import torch
 from abc import abstractmethod, ABC
@@ -11,25 +20,27 @@ class Task2vN(ABC):
         self.reversal = False
         self.reward = torch.Tensor([constants.REWARD])
         self.punishment = torch.Tensor([constants.PUNISHMENT])
-        self.not_acted_outcome = torch.Tensor([0.])
+        self.not_acted_outcome = torch.Tensor([0.0])
         self.representation_size = nr_distractor + nr_signal
         signal_idxs = torch.tensor(list(range(nr_signal)))
-        self.stimulus1_idx = signal_idxs[:int(nr_signal / 2)]
-        self.stimulus2_idx = signal_idxs[int(nr_signal / 2):]
+        self.stimulus1_idx = signal_idxs[: int(nr_signal / 2)]
+        self.stimulus2_idx = signal_idxs[int(nr_signal / 2) :]
         self.correct = torch.Tensor([1])
         self.wrong = torch.Tensor([0])
 
-    def init_trial(self, stimulus: bool = None) -> bool:
+    def init_trial(self, stimulus: bool | None = None) -> bool:
         if stimulus is None:
             stimulus = bool(random.getrandbits(1))
-        self.go_trial = (stimulus and not self.reversal) or (not stimulus and self.reversal)
+        self.go_trial = (stimulus and not self.reversal) or (
+            not stimulus and self.reversal
+        )
         return stimulus
 
     @abstractmethod
-    def init_stimuli(self, stimulus: bool = None) -> torch.Tensor:
+    def init_stimuli(self, stimulus: bool | None = None) -> torch.Tensor:
         raise NotImplementedError("Abstract method")
 
-    def get_outcome(self, acted_upon) -> (torch.Tensor, torch.Tensor):
+    def get_outcome(self, acted_upon) -> tuple[torch.Tensor, torch.Tensor]:
         if acted_upon:
             if self.go_trial:
                 return self.reward, self.correct
@@ -46,30 +57,50 @@ class Task2vN(ABC):
 
 
 class Binary2VN(Task2vN):
-    def __init__(self, nr_distractor: int, nr_signal: int, distractor_amplitude: float = 1.,
-                 signal_amplitude: float = 1.):
+    def __init__(
+        self,
+        nr_distractor: int,
+        nr_signal: int,
+        distractor_amplitude: float = 1.0,
+        signal_amplitude: float = 1.0,
+    ):
         super().__init__(nr_distractor=nr_distractor, nr_signal=nr_signal)
         self._noise_amplitude = distractor_amplitude
         self._signal_amplitude = signal_amplitude
 
-    def init_stimuli(self, stimulus: bool = None) -> torch.Tensor:
+    def init_stimuli(self, stimulus: bool | None = None) -> torch.Tensor:
         stimulus = self.init_trial(stimulus=stimulus)
-        representation = torch.mul(torch.randint(low=0, high=2, size=(self.representation_size,)).float(),
-                                   self._noise_amplitude)
+        representation = torch.mul(
+            torch.randint(low=0, high=2, size=(self.representation_size,)).float(),
+            self._noise_amplitude,
+        )
         if stimulus:
-            representation.index_fill_(dim=0, index=self.stimulus1_idx, value=self._signal_amplitude)
-            representation.index_fill_(dim=0, index=self.stimulus2_idx, value=0.)
+            representation.index_fill_(
+                dim=0, index=self.stimulus1_idx, value=self._signal_amplitude
+            )
+            representation.index_fill_(dim=0, index=self.stimulus2_idx, value=0.0)
         else:
-            representation.index_fill_(dim=0, index=self.stimulus1_idx, value=0.)
-            representation.index_fill_(dim=0, index=self.stimulus2_idx, value=self._signal_amplitude)
+            representation.index_fill_(dim=0, index=self.stimulus1_idx, value=0.0)
+            representation.index_fill_(
+                dim=0, index=self.stimulus2_idx, value=self._signal_amplitude
+            )
 
         return representation
 
 
-def get_task(task_id: ids.TaskID, nr_distractor: int, nr_signal: int, distractor_amplitude: float = 1.,
-             signal_amplitude: float = 1.) -> Task2vN:
+def get_task(
+    task_id: ids.TaskID,
+    nr_distractor: int,
+    nr_signal: int,
+    distractor_amplitude: float = 1.0,
+    signal_amplitude: float = 1.0,
+) -> Task2vN:
     if task_id == ids.BINARY_2VN:
-        return Binary2VN(nr_distractor=nr_distractor, nr_signal=nr_signal, distractor_amplitude=distractor_amplitude,
-                         signal_amplitude=signal_amplitude)
+        return Binary2VN(
+            nr_distractor=nr_distractor,
+            nr_signal=nr_signal,
+            distractor_amplitude=distractor_amplitude,
+            signal_amplitude=signal_amplitude,
+        )
     else:
         raise NotImplementedError(task_id)

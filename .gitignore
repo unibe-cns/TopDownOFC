@@ -1,0 +1,11 @@
+var/
+wheels/
+*.egg-info/
+/jobs/
+/figures/
+/results/
+.idea/
+.env/
+log
+*.log
+*__pycache__/
